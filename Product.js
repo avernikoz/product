@@ -21,24 +21,25 @@ function multiply(first, second) {
 
         for (j = 0; j < first.length; j++) {
 
-            a[j] = second[second_end] * first[first_end - j];
+            a[a.length] = second[second_end-i] * first[first_end - j];
 
             if (tmp !== undefined) { // если что-то запоминали
-                a[j] = a[j] + parseInt(tmp); // складываем с тем что запоминали
+                a[a.length-1] = a[a.length-1] + parseInt(tmp); // складываем с тем что запоминали
                 tmp = undefined;
             }
 
-            if (a[j].toString().length > 1 && j != first_end) { // если двузначное число получилось при умножении
-                tmp = a[j].toString();
-                a[j] = tmp[1]; // заносим вторую цифру от двузначного числа
+            if (a[a.length-1].toString().length > 1 && j != first_end) { // если двузначное число получилось при умножении
+                tmp = a[a.length-1].toString();
+                a[a.length-1] = parseInt(tmp[1]); // заносим вторую цифру от двузначного числа
                 tmp = tmp[0]; // запоминаем первую цифру от двузнач
             }
 
         }
     }
 
+    a.reverse();
 
-    return [a, tmp, a[4]];
+    return [a, tmp];
     //return c.toString();
 }
 
