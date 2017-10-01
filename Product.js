@@ -54,26 +54,6 @@ function multiply(first, second) {
     // res.reverse();
     var modif = first.length;
 
-    // for (i=0; 0 < a.length; i++){
-    //     res[i] = a.splice(0,first.length);
-    //     for (j = 0; j > 0; j--) {
-
-            // res[i].unshift(0);
-        // }
-    // }
-
-    // for (i=0; i < 5; i++){
-    //     for (j = i; j < 5; j++) {
-    //
-    //         res[i].push(0);
-    //     }
-    // }
-    //
-    //
-    // var result = [];
-    //     for (j = 0; j < 5; j++) {
-    //         result = +result + +res[j][6];
-    // }
 
     var maxcolcount = res[rowcount].length-1;
     var alpha = 0;
@@ -98,10 +78,22 @@ function multiply(first, second) {
         }
 
         if (gamma[gamma.length-1].toString().length > 1) { // если двузначное число получилось при умножении
-            tmp = gamma[gamma.length-1].toString();
-            gamma[gamma.length-1] = parseInt(tmp[1]); // заносим вторую цифру от двузначного числа
-            tmp = tmp[0]; // запоминаем первую цифру от двузнач
 
+            if (gamma[gamma.length-1].toString().length == 2 ) {
+                tmp = gamma[gamma.length - 1].toString();
+                gamma[gamma.length - 1] = parseInt(tmp[1]); // заносим вторую цифру от двузначного числа
+                tmp = tmp[0]; // запоминаем первую цифру от двузнач
+            }
+            else if (gamma[gamma.length-1].toString().length == 3){
+                tmp = gamma[gamma.length - 1].toString();
+                gamma[gamma.length - 1] = parseInt(tmp[2]);
+                tmp = tmp[0] + tmp[1];
+            }
+            else if (gamma[gamma.length-1].toString().length == 4){
+                tmp = gamma[gamma.length - 1].toString();
+                gamma[gamma.length - 1] = parseInt(tmp[3]);
+                tmp = tmp[0] + tmp[1] + tmp[2];
+            }
             if (j == maxcolcount){
                 gamma[gamma.length] = parseInt(tmp);
                 tmp = undefined;
@@ -113,23 +105,10 @@ function multiply(first, second) {
     var finresult = [];
     finresult = gamma.slice().reverse().join('');
 
+    var leg = '';
 
-
-    return [a, tmp, res,'selected = '+res[0][7],'result = '+alpha,'maxcolcount = '+ maxcolcount,'rowcount = '+ rowcount, res[1].length-1, gamma,finresult];
+    return [a, tmp, res,'selected = '+res[0][7],'result = '+alpha,'maxcolcount = '+ maxcolcount,'rowcount = '+ rowcount, res[1].length-1, gamma,finresult, leg.length];
 }
 
-// multiply('30125','19444');
 
-
-console.log(multiply('82924685', '31212321312312354381'));
-
-
-//for (i=0; i < 3; i++){
-//
-//    for (j=0; j < 5; j++){
-//
-//        a[j] = second[second_end] * first[first_end - j];
-//
-//    }
-//
-//}
+console.log(multiply('333333333333333333333', '22222222222222222222'));
