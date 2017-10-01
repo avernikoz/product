@@ -77,23 +77,51 @@ function multiply(first, second) {
 
     var maxcolcount = res[rowcount].length-1;
     var alpha = 0;
+    var gamma = [];
+    var tmp2 = 0;
 
     for (j=0; j <= maxcolcount; j++){
+        alpha = 0;
         for (i=0; i <= rowcount; i++){
             if (res[i][j] == undefined){
                 continue;
             }
             alpha += res[i][j];
         }
+
+
+        gamma[j] = alpha;
+
+        if (tmp !== undefined) { // если что-то запоминали
+            gamma[gamma.length-1] = gamma[gamma.length-1] + parseInt(tmp); // складываем с тем что запоминали
+            tmp = undefined;
+        }
+
+        if (gamma[gamma.length-1].toString().length > 1) { // если двузначное число получилось при умножении
+            tmp = gamma[gamma.length-1].toString();
+            gamma[gamma.length-1] = parseInt(tmp[1]); // заносим вторую цифру от двузначного числа
+            tmp = tmp[0]; // запоминаем первую цифру от двузнач
+
+            if (j == maxcolcount){
+                gamma[gamma.length] = parseInt(tmp);
+                tmp = undefined;
+            }
+        }
+
     }
 
-    return [a, tmp, res,'selected = '+res[0][7],'result = '+alpha,'maxcolcount = '+ maxcolcount,'rowcount = '+ rowcount, res[1].length-1];
+    var finresult = [];
+    finresult = gamma.slice().reverse().join('');
+
+
+
+    return [a, tmp, res,'selected = '+res[0][7],'result = '+alpha,'maxcolcount = '+ maxcolcount,'rowcount = '+ rowcount, res[1].length-1, gamma,finresult];
 }
 
 // multiply('30125','19444');
 
 
-console.log(multiply('82924685', '31254381'));
+console.log(multiply('82924685', '31212321312312354381'));
 
 
 //for (i=0; i < 3; i++){
